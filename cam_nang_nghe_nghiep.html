@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cẩm Nang Nghề Nghiệp | Công Nghệ Thông Tin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #2563eb;
+            --blue-dark: #1e40af;
+            --blue-glow: #3b82f6;
+            --cyan: #06b6d4;
+            --green: #10b981;
+            --purple: #8b5cf6;
+            --orange: #f59e0b;
+            --pink: #ec4899;
+            --bg: #060d1a;
+            --bg2: #0d1b2e;
+            --card: #0f1f35;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --border: rgba(99,179,250,0.15);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── STAR BACKGROUND ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+                radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+                radial-gradient(1px 1px at 50% 30%, rgba(255,255,255,0.7) 0%, transparent 100%),
+                radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+                radial-gradient(1px 1px at 85% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+                radial-gradient(1px 1px at 95% 55%, rgba(255,255,255,0.4) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 38% 88%, rgba(99,179,250,0.8) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 60% 10%, rgba(99,179,250,0.7) 0%, transparent 100%),
+                radial-gradient(2px 2px at 78% 45%, rgba(139,92,246,0.6) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── HEADER ── */
+        header {
+            position: relative;
+            text-align: center;
+            padding: 5rem 1rem 4rem;
+            background: linear-gradient(180deg, #020b18 0%, #0d1b2e 100%);
+            overflow: hidden;
+        }
+
+        .header-glow {
+            position: absolute;
+            top: -60px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 300px;
+            background: radial-gradient(ellipse, rgba(37,99,235,0.4) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .header-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(37,99,235,0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37,99,235,0.07) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: linear-gradient(180deg, transparent 0%, black 30%, black 70%, transparent 100%);
+        }
+
+        /* ── CIRCUIT SVG HERO ── */
+        .hero-illustration {
+            position: relative;
+            margin: 0 auto 2rem;
+            width: 280px;
+            height: 160px;
+        }
+
+        header h1 {
+            position: relative;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #93c5fd, #ffffff, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            position: relative;
+            font-size: 1.1rem;
+            color: var(--cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .badge-row {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .badge {
+            background: rgba(37,99,235,0.2);
+            border: 1px solid rgba(99,179,250,0.3);
+            color: #93c5fd;
+            padding: 5px 14px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        /* ── CONTAINER ── */
+        .container {
+            position: relative;
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 3rem 20px 4rem;
+            z-index: 1;
+        }
+
+        /* ── CARDS ── */
+        .criteria-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(15,31,53,0.95) 0%, rgba(10,20,38,0.98) 100%);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 0;
+            margin-bottom: 28px;
+            overflow: hidden;
+            transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.35s ease;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+        }
+
+        .criteria-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(37,99,235,0.08), transparent 60%);
+            pointer-events: none;
+        }
+
+        .criteria-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 16px 50px rgba(37,99,235,0.2), 0 0 0 1px rgba(99,179,250,0.25);
+        }
+
+        .card-image-band {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-image-band svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-body {
+            padding: 22px 28px 26px;
+        }
+
+        .criteria-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .criteria-number {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            width: 38px; height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(37,99,235,0.45);
+        }
+
+        .criteria-question {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            line-height: 1.4;
+        }
+
+        .criteria-answer {
+            color: var(--muted);
+            font-size: 0.97rem;
+            line-height: 1.75;
+        }
+
+        .criteria-answer ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 8px;
+        }
+
+        .criteria-answer li {
+            padding: 7px 0 7px 26px;
+            position: relative;
+            border-bottom: 1px solid rgba(99,179,250,0.07);
+        }
+
+        .criteria-answer li:last-child { border-bottom: none; }
+
+        .criteria-answer li::before {
+            content: '▸';
+            position: absolute;
+            left: 4px;
+            color: var(--cyan);
+            font-size: 0.85rem;
+        }
+
+        .highlight {
+            color: #93c5fd;
+            font-weight: 600;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(6,182,212,0.12);
+            border: 1px solid rgba(6,182,212,0.3);
+            color: var(--cyan);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-family: 'Space Mono', monospace;
+            margin: 3px 3px 0 0;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* ── SCROLL FADE-IN ── */
+        .criteria-card {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            animation: fadeUp 0.6s ease forwards;
+        }
+        .criteria-card:nth-child(1) { animation-delay: 0.1s; }
+        .criteria-card:nth-child(2) { animation-delay: 0.2s; }
+        .criteria-card:nth-child(3) { animation-delay: 0.3s; }
+        .criteria-card:nth-child(4) { animation-delay: 0.4s; }
+        .criteria-card:nth-child(5) { animation-delay: 0.5s; }
+        .criteria-card:nth-child(6) { animation-delay: 0.6s; }
+        .criteria-card:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ── FLOATING DOTS DECORATION ── */
+        .dot-grid {
+            position: absolute;
+            right: -20px; top: 20px;
+            width: 80px; height: 80px;
+            background-image: radial-gradient(circle, rgba(99,179,250,0.35) 1.5px, transparent 1.5px);
+            background-size: 14px 14px;
+            opacity: 0.6;
+        }
+
+        /* ── ACCENT LINE ── */
+        .accent-line {
+            height: 3px;
+            border-radius: 2px;
+            margin: -1px 0 0 0;
+        }
+
+        /* ══════════════════════════════════════
+           PRINT STYLES — A4
+        ══════════════════════════════════════ */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 12mm 12mm 14mm 12mm;
+            }
+
+            /* Reset dark theme → white for print */
+            :root {
+                --bg: #ffffff;
+                --bg2: #ffffff;
+                --card: #ffffff;
+                --text: #1a1a2e;
+                --muted: #4a4a6a;
+                --border: rgba(37,99,235,0.25);
+                --blue: #2563eb;
+                --cyan: #0891b2;
+                --green: #059669;
+                --purple: #7c3aed;
+                --orange: #d97706;
+                --pink: #db2777;
+            }
+
+            html, body {
+                background: #fff !important;
+                color: #1a1a2e !important;
+                font-size: 9.5pt;
+                line-height: 1.5;
+                overflow: visible !important;
+            }
+
+            /* Hide decorative fixed elements */
+            body::before { display: none !important; }
+            .header-glow,
+            .header-grid,
+            .dot-grid { display: none !important; }
+
+            /* ── HEADER ── */
+            header {
+                background: linear-gradient(135deg, #1e40af, #2563eb) !important;
+                color: white !important;
+                padding: 18pt 12pt 14pt !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                page-break-after: avoid;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+
+            header h1 {
+                font-size: 20pt !important;
+                background: none !important;
+                -webkit-text-fill-color: white !important;
+                color: white !important;
+            }
+
+            header p {
+                color: #bfdbfe !important;
+                font-size: 8pt !important;
+            }
+
+            .badge-row { margin-top: 8pt !important; }
+
+            .badge {
+                background: rgba(255,255,255,0.15) !important;
+                border-color: rgba(255,255,255,0.4) !important;
+                color: white !important;
+                font-size: 7pt !important;
+                padding: 3pt 8pt !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Hero SVG in header — scale down */
+            .hero-illustration {
+                width: 180pt !important;
+                height: 90pt !important;
+                margin-bottom: 10pt !important;
+            }
+
+            /* ── CONTAINER ── */
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 10pt 0 0 0 !important;
+            }
+
+            /* ── CARDS ── */
+            .criteria-card {
+                opacity: 1 !important;
+                transform: none !important;
+                animation: none !important;
+                background: #ffffff !important;
+                border: 1.5pt solid #bfdbfe !important;
+                border-radius: 8pt !important;
+                margin-bottom: 10pt !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .criteria-card::before { display: none !important; }
+
+            /* SVG illustration bands — keep but reduce height */
+            .card-image-band {
+                height: 90pt !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .card-image-band svg {
+                filter: none !important;
+            }
+
+            /* Accent line — keep gradient */
+            .accent-line {
+                height: 2.5pt !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Card body */
+            .card-body {
+                padding: 10pt 14pt 12pt !important;
+            }
+
+            /* Number badge */
+            .criteria-number {
+                width: 24pt !important;
+                height: 24pt !important;
+                font-size: 8pt !important;
+                border-radius: 6pt !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .criteria-question {
+                font-size: 10pt !important;
+                color: #0f172a !important;
+            }
+
+            .criteria-answer {
+                font-size: 9pt !important;
+                color: #374151 !important;
+            }
+
+            .criteria-answer li {
+                padding: 4pt 0 4pt 20pt !important;
+                border-bottom-color: #e2e8f0 !important;
+            }
+
+            .criteria-answer li::before {
+                color: #0891b2 !important;
+            }
+
+            .highlight {
+                color: #1d4ed8 !important;
+            }
+
+            .tag {
+                background: #eff6ff !important;
+                border-color: #93c5fd !important;
+                color: #1d4ed8 !important;
+                font-size: 7.5pt !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* ── FOOTER ── */
+            footer {
+                border-top: 1pt solid #e2e8f0 !important;
+                color: #64748b !important;
+                font-size: 7.5pt !important;
+                padding: 8pt 0 0 0 !important;
+                margin-top: 6pt !important;
+            }
+
+            /* page-break hints */
+            .criteria-card:nth-child(4) { page-break-before: auto; }
+        }
+
+        /* ── PRINT BUTTON (screen only) ── */
+        .print-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 999px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(37,99,235,0.4);
+            z-index: 999;
+            transition: transform 0.2s, box-shadow 0.2s;
+            letter-spacing: 0.5px;
+        }
+        .print-btn:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 10px 30px rgba(37,99,235,0.5);
+        }
+        @media print { .print-btn { display: none !important; } }
+    </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header>
+    <div class="header-glow"></div>
+    <div class="header-grid"></div>
+
+    <!-- Hero SVG Illustration: Circuit / Tech -->
+    <div class="hero-illustration">
+        <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- circuit lines -->
+            <line x1="20" y1="80" x2="80" y2="80" stroke="#2563eb" stroke-width="2" opacity="0.7"/>
+            <line x1="80" y1="80" x2="80" y2="40" stroke="#2563eb" stroke-width="2" opacity="0.7"/>
+            <line x1="80" y1="40" x2="140" y2="40" stroke="#06b6d4" stroke-width="2" opacity="0.8"/>
+            <line x1="140" y1="40" x2="140" y2="80" stroke="#06b6d4" stroke-width="2" opacity="0.7"/>
+            <line x1="140" y1="80" x2="200" y2="80" stroke="#8b5cf6" stroke-width="2" opacity="0.7"/>
+            <line x1="200" y1="80" x2="200" y2="120" stroke="#8b5cf6" stroke-width="2" opacity="0.7"/>
+            <line x1="200" y1="120" x2="260" y2="120" stroke="#2563eb" stroke-width="2" opacity="0.7"/>
+            <line x1="80" y1="80" x2="80" y2="130" stroke="#06b6d4" stroke-width="1.5" opacity="0.5"/>
+            <line x1="80" y1="130" x2="140" y2="130" stroke="#06b6d4" stroke-width="1.5" opacity="0.5"/>
+            <line x1="140" y1="130" x2="140" y2="80" stroke="#10b981" stroke-width="1.5" opacity="0.5"/>
+
+            <!-- nodes / chips -->
+            <rect x="110" y="60" width="60" height="40" rx="6" fill="#0d1b2e" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="140" y="84" font-size="9" fill="#93c5fd" text-anchor="middle" font-family="monospace">CPU</text>
+            <rect x="110" y="60" width="60" height="40" rx="6" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+
+            <!-- LED dots -->
+            <circle cx="20" cy="80" r="5" fill="#10b981"><animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/></circle>
+            <circle cx="80" cy="40" r="4" fill="#06b6d4"><animate attributeName="opacity" values="1;0.2;1" dur="1.5s" repeatCount="indefinite"/></circle>
+            <circle cx="260" cy="120" r="5" fill="#8b5cf6"><animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/></circle>
+            <circle cx="200" cy="80" r="4" fill="#2563eb"><animate attributeName="opacity" values="0.4;1;0.4" dur="1.8s" repeatCount="indefinite"/></circle>
+            <circle cx="140" cy="130" r="4" fill="#10b981"><animate attributeName="opacity" values="1;0.2;1" dur="2.2s" repeatCount="indefinite"/></circle>
+
+            <!-- data pulse animation on main line -->
+            <circle r="4" fill="#06b6d4" opacity="0.9">
+                <animateMotion dur="3s" repeatCount="indefinite"
+                    path="M20,80 L80,80 L80,40 L140,40 L140,80 L200,80 L200,120 L260,120"/>
+                <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- mini components -->
+            <rect x="55" y="74" width="10" height="12" rx="2" fill="#1e40af" stroke="#3b82f6" stroke-width="1"/>
+            <rect x="195" y="74" width="10" height="12" rx="2" fill="#1e40af" stroke="#8b5cf6" stroke-width="1"/>
+
+            <!-- wifi icon top right -->
+            <g transform="translate(230, 20)" opacity="0.7">
+                <path d="M0,20 Q10,-5 20,20" stroke="#06b6d4" stroke-width="2" fill="none"/>
+                <path d="M4,20 Q10,2 16,20" stroke="#06b6d4" stroke-width="2" fill="none"/>
+                <circle cx="10" cy="20" r="2.5" fill="#06b6d4"/>
+            </g>
+
+            <!-- code brackets -->
+            <text x="10" y="25" font-size="22" fill="#2563eb" font-family="monospace" opacity="0.5">&lt;/&gt;</text>
+        </svg>
+    </div>
+
+    <h1>Cẩm Nang Nghề Nghiệp</h1>
+    <p>Công Nghệ Thông Tin</p>
+    <div class="badge-row">
+        <span class="badge">Web Dev</span>
+        <span class="badge">AI Engineer</span>
+        <span class="badge">IoT / Hardware</span>
+        <span class="badge">Future Tech</span>
+    </div>
+</header>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<div class="container">
+
+    <!-- CARD 1: Nghề quan tâm -->
+    <div class="criteria-card">
+        <div class="card-image-band">
+            <svg viewBox="0 0 920 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#060d1a"/>
+                        <stop offset="100%" stop-color="#0d2040"/>
+                    </linearGradient>
+                </defs>
+                <rect width="920" height="180" fill="url(#g1)"/>
+                <!-- Code editor mockup -->
+                <rect x="40" y="20" width="260" height="145" rx="10" fill="#0a1628" stroke="#1e40af" stroke-width="1.5"/>
+                <rect x="40" y="20" width="260" height="30" rx="10" fill="#1e3a5f"/>
+                <rect x="40" y="40" width="260" height="10" fill="#1e3a5f"/>
+                <circle cx="62" cy="35" r="6" fill="#ef4444"/>
+                <circle cx="80" cy="35" r="6" fill="#f59e0b"/>
+                <circle cx="98" cy="35" r="6" fill="#10b981"/>
+                <!-- code lines -->
+                <rect x="60" y="65" width="60" height="6" rx="3" fill="#8b5cf6" opacity="0.8"/>
+                <rect x="128" y="65" width="40" height="6" rx="3" fill="#06b6d4" opacity="0.8"/>
+                <rect x="60" y="82" width="20" height="6" rx="3" fill="#06b6d4" opacity="0.7"/>
+                <rect x="88" y="82" width="80" height="6" rx="3" fill="#f59e0b" opacity="0.7"/>
+                <rect x="60" y="99" width="100" height="6" rx="3" fill="#10b981" opacity="0.7"/>
+                <rect x="60" y="116" width="50" height="6" rx="3" fill="#8b5cf6" opacity="0.6"/>
+                <rect x="118" y="116" width="30" height="6" rx="3" fill="#ec4899" opacity="0.6"/>
+                <rect x="60" y="133" width="80" height="6" rx="3" fill="#2563eb" opacity="0.7"/>
+                <rect x="148" y="133" width="40" height="6" rx="3" fill="#06b6d4" opacity="0.6"/>
+
+                <!-- Browser mockup -->
+                <rect x="340" y="15" width="300" height="155" rx="10" fill="#0a1628" stroke="#06b6d4" stroke-width="1.5"/>
+                <rect x="340" y="15" width="300" height="35" rx="10" fill="#0d2040"/>
+                <rect x="340" y="40" width="300" height="10" fill="#0d2040"/>
+                <rect x="370" y="23" width="200" height="16" rx="8" fill="#0a1628" stroke="#1e40af" stroke-width="1"/>
+                <text x="400" y="35" font-size="9" fill="#64748b" font-family="monospace">https://mywebsite.vn</text>
+                <circle cx="358" cy="31" r="5" fill="#1e3a5f"/>
+                <!-- website content lines -->
+                <rect x="360" y="60" width="120" height="10" rx="4" fill="#2563eb" opacity="0.7"/>
+                <rect x="360" y="78" width="250" height="5" rx="2" fill="#334155" opacity="0.7"/>
+                <rect x="360" y="90" width="220" height="5" rx="2" fill="#334155" opacity="0.5"/>
+                <rect x="360" y="102" width="240" height="5" rx="2" fill="#334155" opacity="0.5"/>
+                <rect x="360" y="120" width="80" height="20" rx="6" fill="#2563eb" opacity="0.8"/>
+                <rect x="450" y="120" width="80" height="20" rx="6" fill="#0a1628" stroke="#06b6d4" stroke-width="1" opacity="0.8"/>
+
+                <!-- AI brain / neural net icon -->
+                <g transform="translate(700, 30)">
+                    <circle cx="60" cy="30" r="22" fill="none" stroke="#8b5cf6" stroke-width="1.5" opacity="0.6"/>
+                    <circle cx="60" cy="30" r="12" fill="none" stroke="#8b5cf6" stroke-width="1" opacity="0.4"/>
+                    <!-- neurons -->
+                    <circle cx="60" cy="8" r="4" fill="#8b5cf6"/>
+                    <circle cx="82" cy="30" r="4" fill="#ec4899"/>
+                    <circle cx="60" cy="52" r="4" fill="#06b6d4"/>
+                    <circle cx="38" cy="30" r="4" fill="#10b981"/>
+                    <circle cx="76" cy="14" r="3" fill="#f59e0b"/>
+                    <circle cx="76" cy="46" r="3" fill="#f59e0b"/>
+                    <circle cx="44" cy="14" r="3" fill="#f59e0b"/>
+                    <circle cx="44" cy="46" r="3" fill="#f59e0b"/>
+                    <!-- synapse lines -->
+                    <line x1="60" y1="8" x2="82" y2="30" stroke="#8b5cf6" stroke-width="1" opacity="0.5"/>
+                    <line x1="60" y1="8" x2="38" y2="30" stroke="#8b5cf6" stroke-width="1" opacity="0.5"/>
+                    <line x1="82" y1="30" x2="60" y2="52" stroke="#ec4899" stroke-width="1" opacity="0.5"/>
+                    <line x1="38" y1="30" x2="60" y2="52" stroke="#10b981" stroke-width="1" opacity="0.5"/>
+                    <line x1="60" y1="8" x2="60" y2="52" stroke="#06b6d4" stroke-width="1" opacity="0.3" stroke-dasharray="4 3"/>
+                    <text x="60" y="85" font-size="11" fill="#8b5cf6" text-anchor="middle" font-family="monospace">AI Model</text>
+                    <!-- IoT -->
+                    <rect x="20" y="105" width="80" height="50" rx="8" fill="#0a1628" stroke="#10b981" stroke-width="1.5"/>
+                    <circle cx="35" cy="118" r="4" fill="#10b981"><animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite"/></circle>
+                    <circle cx="48" cy="118" r="4" fill="#f59e0b"><animate attributeName="opacity" values="0.2;1;0.2" dur="1.5s" repeatCount="indefinite"/></circle>
+                    <rect x="28" y="128" width="64" height="5" rx="2" fill="#06b6d4" opacity="0.5"/>
+                    <rect x="28" y="138" width="48" height="5" rx="2" fill="#06b6d4" opacity="0.3"/>
+                    <text x="60" y="162" font-size="9" fill="#10b981" text-anchor="middle" font-family="monospace">ESP32</text>
+                </g>
+            </svg>
+        </div>
+        <div class="accent-line" style="background:linear-gradient(90deg,#2563eb,#06b6d4)"></div>
+        <div class="card-body">
+            <div class="dot-grid"></div>
+            <div class="criteria-header">
+                <div class="criteria-number">01</div>
+                <h2 class="criteria-question">Em kể tên được những nghề mà mình quan tâm</h2>
+            </div>
+            <div class="criteria-answer">
+                Em đặc biệt quan tâm đến lĩnh vực Công nghệ thông tin (CNTT), cụ thể là các vị trí:
+                <br><br>
+                <span class="tag">🌐 Web Developer</span>
+                <span class="tag">🤖 AI Engineer</span>
+                <span class="tag">⚡ IoT / Hardware</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 2: Hoạt động & thiết bị -->
+    <div class="criteria-card">
+        <div class="card-image-band">
+            <svg viewBox="0 0 920 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#060d1a"/>
+                        <stop offset="100%" stop-color="#0a1f0f"/>
+                    </linearGradient>
+                </defs>
+                <rect width="920" height="180" fill="url(#g2)"/>
+                <!-- Laptop -->
+                <rect x="50" y="30" width="200" height="130" rx="10" fill="#0a1628" stroke="#10b981" stroke-width="1.5"/>
+                <rect x="30" y="155" width="240" height="12" rx="4" fill="#0d2040" stroke="#10b981" stroke-width="1"/>
+                <rect x="60" y="40" width="180" height="110" rx="5" fill="#060d1a"/>
+                <!-- terminal on laptop -->
+                <rect x="70" y="50" width="160" height="90" rx="4" fill="#020810"/>
+                <text x="80" y="68" font-size="8" fill="#10b981" font-family="monospace">$ python model.py</text>
+                <text x="80" y="80" font-size="8" fill="#94a3b8" font-family="monospace">Loading dataset...</text>
+                <text x="80" y="92" font-size="8" fill="#94a3b8" font-family="monospace">Epoch 1/50: loss=0.43</text>
+                <text x="80" y="104" font-size="8" fill="#10b981" font-family="monospace">Accuracy: 94.2%  ✓</text>
+                <rect x="80" y="110" width="2" height="10" fill="#10b981"><animate attributeName="opacity" values="1;0;1" dur="0.8s" repeatCount="indefinite"/></rect>
+
+                <!-- Server rack -->
+                <g transform="translate(310, 15)">
+                    <rect width="120" height="155" rx="8" fill="#0a1628" stroke="#2563eb" stroke-width="1.5"/>
+                    <rect x="8" y="15" width="104" height="18" rx="3" fill="#0d2040"/>
+                    <rect x="8" y="38" width="104" height="18" rx="3" fill="#0d2040"/>
+                    <rect x="8" y="61" width="104" height="18" rx="3" fill="#0d2040"/>
+                    <rect x="8" y="84" width="104" height="18" rx="3" fill="#0d2040"/>
+                    <rect x="8" y="107" width="104" height="18" rx="3" fill="#0d2040"/>
+                    <!-- LEDs -->
+                    <circle cx="16" cy="24" r="3" fill="#10b981"><animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/></circle>
+                    <circle cx="16" cy="47" r="3" fill="#10b981"><animate attributeName="opacity" values="1;0.3;1" dur="1.3s" repeatCount="indefinite"/></circle>
+                    <circle cx="16" cy="70" r="3" fill="#f59e0b"><animate attributeName="opacity" values="0.5;1;0.5" dur="0.7s" repeatCount="indefinite"/></circle>
+                    <circle cx="16" cy="93" r="3" fill="#10b981"><animate attributeName="opacity" values="1;0.2;1" dur="1.6s" repeatCount="indefinite"/></circle>
+                    <circle cx="16" cy="116" r="3" fill="#ef4444"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+                    <rect x="24" y="21" width="60" height="6" rx="2" fill="#1e3a5f"/>
+                    <rect x="24" y="44" width="50" height="6" rx="2" fill="#1e3a5f"/>
+                    <rect x="24" y="67" width="70" height="6" rx="2" fill="#1e3a5f"/>
+                    <rect x="24" y="90" width="55" height="6" rx="2" fill="#1e3a5f"/>
+                    <rect x="24" y="113" width="65" height="6" rx="2" fill="#1e3a5f"/>
+                    <text x="60" y="148" font-size="9" fill="#2563eb" text-anchor="middle" font-family="monospace">SERVER</text>
+                </g>
+
+                <!-- Arduino / MCU board -->
+                <g transform="translate(500, 20)">
+                    <rect width="150" height="110" rx="6" fill="#063a1f" stroke="#10b981" stroke-width="1.5"/>
+                    <!-- pins top -->
+                    <rect x="10" y="-6" width="6" height="10" rx="1" fill="#94a3b8"/>
+                    <rect x="24" y="-6" width="6" height="10" rx="1" fill="#94a3b8"/>
+                    <rect x="38" y="-6" width="6" height="10" rx="1" fill="#94a3b8"/>
+                    <rect x="52" y="-6" width="6" height="10" rx="1" fill="#94a3b8"/>
+                    <rect x="66" y="-6" width="6" height="10" rx="1" fill="#94a3b8"/>
+                    <!-- chips -->
+                    <rect x="15" y="20" width="50" height="35" rx="4" fill="#0a1a10" stroke="#10b981" stroke-width="1"/>
+                    <text x="40" y="41" font-size="7" fill="#10b981" text-anchor="middle" font-family="monospace">ATmega</text>
+                    <rect x="80" y="25" width="35" height="25" rx="3" fill="#0a1a10" stroke="#06b6d4" stroke-width="1"/>
+                    <text x="97" y="40" font-size="6" fill="#06b6d4" text-anchor="middle" font-family="monospace">WiFi</text>
+                    <!-- LED on board -->
+                    <circle cx="130" cy="20" r="5" fill="#10b981"><animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/></circle>
+                    <circle cx="130" cy="35" r="5" fill="#f59e0b"><animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/></circle>
+                    <!-- USB port -->
+                    <rect x="2" y="70" width="18" height="25" rx="2" fill="#0a1628" stroke="#94a3b8" stroke-width="1"/>
+                    <text x="75" y="100" font-size="9" fill="#10b981" text-anchor="middle" font-family="monospace">Arduino ESP32</text>
+                </g>
+
+                <!-- Sensor components -->
+                <g transform="translate(700, 40)">
+                    <text x="0" y="0" font-size="11" fill="#06b6d4" font-family="monospace">Sensors:</text>
+                    <rect x="0" y="10" width="100" height="22" rx="5" fill="#0a1628" stroke="#06b6d4" stroke-width="1"/>
+                    <text x="50" y="25" font-size="9" fill="#06b6d4" text-anchor="middle" font-family="monospace">DHT22 Temp</text>
+                    <rect x="0" y="38" width="100" height="22" rx="5" fill="#0a1628" stroke="#8b5cf6" stroke-width="1"/>
+                    <text x="50" y="53" font-size="9" fill="#8b5cf6" text-anchor="middle" font-family="monospace">PIR Motion</text>
+                    <rect x="0" y="66" width="100" height="22" rx="5" fill="#0a1628" stroke="#f59e0b" stroke-width="1"/>
+                    <text x="50" y="81" font-size="9" fill="#f59e0b" text-anchor="middle" font-family="monospace">LDR Light</text>
+                    <rect x="0" y="94" width="100" height="22" rx="5" fill="#0a1628" stroke="#10b981" stroke-width="1"/>
+                    <text x="50" y="109" font-size="9" fill="#10b981" text-anchor="middle" font-family="monospace">Ultrasonic</text>
+                </g>
+            </svg>
+        </div>
+        <div class="accent-line" style="background:linear-gradient(90deg,#10b981,#06b6d4)"></div>
+        <div class="card-body">
+            <div class="criteria-header">
+                <div class="criteria-number">02</div>
+                <h2 class="criteria-question">Em nêu được hoạt động, trang thiết bị, dụng cụ của nghề</h2>
+            </div>
+            <div class="criteria-answer">
+                <ul>
+                    <li><b style="color:#93c5fd">Hoạt động:</b> Viết mã nguồn (Python, HTML/CSS/JS), xây dựng mô hình AI, thiết kế website, vận hành máy chủ, lập trình vi điều khiển.</li>
+                    <li><b style="color:#93c5fd">Trang thiết bị:</b> Máy tính cấu hình cao, phần mềm lập trình (VS Code, PyCharm), vi điều khiển (Arduino, ESP32), cảm biến điện tử, server.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 3: Nguy hiểm -->
+    <div class="criteria-card">
+        <div class="card-image-band">
+            <svg viewBox="0 0 920 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#1a0606"/>
+                        <stop offset="100%" stop-color="#1a0d00"/>
+                    </linearGradient>
+                </defs>
+                <rect width="920" height="180" fill="url(#g3)"/>
+
+                <!-- Eye strain icon -->
+                <g transform="translate(60, 40)">
+                    <ellipse cx="60" cy="50" rx="55" ry="35" fill="none" stroke="#ef4444" stroke-width="2" opacity="0.6"/>
+                    <circle cx="60" cy="50" r="18" fill="#0a0808" stroke="#ef4444" stroke-width="1.5"/>
+                    <circle cx="60" cy="50" r="8" fill="#ef4444" opacity="0.7"/>
+                    <circle cx="65" cy="45" r="3" fill="white" opacity="0.6"/>
+                    <!-- red lines around eye for strain -->
+                    <line x1="10" y1="20" x2="25" y2="35" stroke="#ef4444" stroke-width="1" opacity="0.4" stroke-dasharray="3 3"/>
+                    <line x1="110" y1="20" x2="95" y2="35" stroke="#ef4444" stroke-width="1" opacity="0.4" stroke-dasharray="3 3"/>
+                    <line x1="60" y1="5" x2="60" y2="20" stroke="#ef4444" stroke-width="1" opacity="0.4" stroke-dasharray="3 3"/>
+                    <text x="60" y="100" font-size="10" fill="#ef4444" text-anchor="middle" font-family="monospace">Mỏi mắt</text>
+                </g>
+
+                <!-- Spine / posture -->
+                <g transform="translate(280, 20)">
+                    <!-- chair silhouette -->
+                    <rect x="30" y="60" width="80" height="8" rx="3" fill="#1e1010" stroke="#f59e0b" stroke-width="1"/>
+                    <rect x="60" y="68" width="20" height="60" rx="3" fill="#1e1010" stroke="#f59e0b" stroke-width="1"/>
+                    <rect x="30" y="120" width="80" height="8" rx="3" fill="#1e1010" stroke="#f59e0b" stroke-width="1"/>
+                    <!-- hunched person silhouette -->
+                    <circle cx="85" cy="40" r="15" fill="#f59e0b" opacity="0.5"/>
+                    <path d="M85,55 Q80,75 75,95 Q85,105 95,95" stroke="#f59e0b" stroke-width="3" fill="none" opacity="0.6"/>
+                    <!-- warning arrow on spine -->
+                    <path d="M75,75 Q65,75 65,65" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="3 2"/>
+                    <text x="40" y="58" font-size="9" fill="#ef4444" font-family="monospace">!</text>
+                    <text x="75" y="148" font-size="10" fill="#f59e0b" text-anchor="middle" font-family="monospace">Cột sống</text>
+                </g>
+
+                <!-- Stress brain -->
+                <g transform="translate(500, 25)">
+                    <text x="75" y="15" font-size="11" fill="#8b5cf6" text-anchor="middle" font-family="monospace">⚠ Căng thẳng</text>
+                    <!-- brain outline -->
+                    <path d="M45,35 Q30,25 32,45 Q20,50 25,65 Q22,80 38,80 Q50,95 65,85 Q80,95 92,80 Q108,80 105,65 Q110,50 98,45 Q100,25 85,35 Q75,20 65,25 Q55,20 45,35Z" 
+                          fill="#1a0a2e" stroke="#8b5cf6" stroke-width="1.5"/>
+                    <!-- stress lightning bolts -->
+                    <path d="M20,50 L30,35 L28,48 L40,33" stroke="#f59e0b" stroke-width="2" fill="none" opacity="0.8">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="0.6s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M100,50 L110,35 L108,48 L120,33" stroke="#f59e0b" stroke-width="2" fill="none" opacity="0.8">
+                        <animate attributeName="opacity" values="1;0.3;1" dur="0.6s" repeatCount="indefinite"/>
+                    </path>
+                    <!-- Bug symbol -->
+                    <text x="65" y="65" font-size="20" fill="#8b5cf6" text-anchor="middle" opacity="0.7">🐛</text>
+                    <text x="65" y="110" font-size="9" fill="#8b5cf6" text-anchor="middle" font-family="monospace">Debug stress</text>
+                </g>
+
+                <!-- Electric hazard -->
+                <g transform="translate(700, 30)">
+                    <polygon points="100,10 140,120 60,120" fill="none" stroke="#f59e0b" stroke-width="2" opacity="0.7"/>
+                    <text x="100" y="90" font-size="40" text-anchor="middle" fill="#f59e0b" opacity="0.5">⚡</text>
+                    <text x="100" y="142" font-size="10" fill="#f59e0b" text-anchor="middle" font-family="monospace">Chập mạch</text>
+                </g>
+            </svg>
+        </div>
+        <div class="accent-line" style="background:linear-gradient(90deg,#ef4444,#f59e0b)"></div>
+        <div class="card-body">
+            <div class="criteria-header">
+                <div class="criteria-number">03</div>
+                <h2 class="criteria-question">Em nhận diện được nguy hiểm có thể gặp phải</h2>
+            </div>
+            <div class="criteria-answer">
+                <ul>
+                    <li>Ngồi sai tư thế lâu ảnh hưởng cột sống, nhìn màn hình liên tục gây <span class="highlight">mỏi mắt</span>.</li>
+                    <li><span class="highlight">Căng thẳng thần kinh</span> khi sửa lỗi hoặc chạy deadline dự án.</li>
+                    <li>Rủi ro <span class="highlight">chập mạch, cháy nổ</span> nhẹ khi thao tác trực tiếp với linh kiện phần cứng, điện tử.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 4: An toàn -->
+    <div class="criteria-card">
+        <div class="card-image-band">
+            <svg viewBox="0 0 920 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#060d1a"/>
+                        <stop offset="100%" stop-color="#062010"/>
+                    </linearGradient>
+                </defs>
+                <rect width="920" height="180" fill="url(#g4)"/>
+
+                <!-- 20-20-20 rule timer -->
+                <g transform="translate(50, 20)">
+                    <circle cx="75" cy="70" r="55" fill="none" stroke="#10b981" stroke-width="2" opacity="0.3"/>
+                    <circle cx="75" cy="70" r="55" fill="none" stroke="#10b981" stroke-width="3" stroke-dasharray="310 345" stroke-dashoffset="-15" opacity="0.8"/>
+                    <text x="75" y="60" font-size="22" fill="#10b981" text-anchor="middle" font-weight="bold" font-family="monospace">20</text>
+                    <text x="75" y="78" font-size="9" fill="#10b981" text-anchor="middle" font-family="monospace">seconds</text>
+                    <text x="75" y="90" font-size="8" fill="#64748b" text-anchor="middle" font-family="monospace">look 20ft away</text>
+                    <text x="75" y="145" font-size="10" fill="#10b981" text-anchor="middle" font-family="monospace">20-20-20 Rule</text>
+                </g>
+
+                <!-- Ergonomic posture -->
+                <g transform="translate(250, 15)">
+                    <!-- monitor -->
+                    <rect x="60" y="10" width="90" height="60" rx="5" fill="#0a1628" stroke="#10b981" stroke-width="1.5"/>
+                    <rect x="65" y="15" width="80" height="50" rx="3" fill="#060d1a"/>
+                    <rect x="98" y="70" width="14" height="20" fill="#0d2040"/>
+                    <rect x="82" y="87" width="46" height="6" rx="2" fill="#0d2040"/>
+                    <!-- proper distance arrow -->
+                    <line x1="10" y1="40" x2="60" y2="40" stroke="#10b981" stroke-width="1" stroke-dasharray="4 3"/>
+                    <text x="35" y="35" font-size="8" fill="#10b981" text-anchor="middle" font-family="monospace">50cm</text>
+                    <!-- person sitting correctly -->
+                    <circle cx="25" cy="35" r="12" fill="#0a1628" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="25" y1="47" x2="25" y2="90" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="25" y1="90" x2="10" y2="115" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="25" y1="90" x2="40" y2="115" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="10" y1="65" x2="35" y2="70" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+                    <!-- check mark -->
+                    <circle cx="165" cy="25" r="12" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
+                    <path d="M159,25 L163,30 L171,20" stroke="#10b981" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <text x="105" y="145" font-size="10" fill="#10b981" text-anchor="middle" font-family="monospace">Tư thế chuẩn</text>
+                </g>
+
+                <!-- Circuit safety check -->
+                <g transform="translate(530, 20)">
+                    <text x="85" y="12" font-size="10" fill="#06b6d4" text-anchor="middle" font-family="monospace">Circuit Checklist</text>
+                    <rect x="0" y="20" width="170" height="20" rx="4" fill="#0a1628" stroke="#10b981" stroke-width="1"/>
+                    <path d="M8,30 L14,36 L22,24" stroke="#10b981" stroke-width="2" fill="none"/>
+                    <text x="32" y="34" font-size="9" fill="#94a3b8" font-family="monospace">Kiểm tra sơ đồ</text>
+                    <rect x="0" y="46" width="170" height="20" rx="4" fill="#0a1628" stroke="#10b981" stroke-width="1"/>
+                    <path d="M8,56 L14,62 L22,50" stroke="#10b981" stroke-width="2" fill="none"/>
+                    <text x="32" y="60" font-size="9" fill="#94a3b8" font-family="monospace">Đúng điện áp</text>
+                    <rect x="0" y="72" width="170" height="20" rx="4" fill="#0a1628" stroke="#f59e0b" stroke-width="1"/>
+                    <rect x="6" y="78" width="10" height="10" rx="2" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+                    <text x="32" y="86" font-size="9" fill="#94a3b8" font-family="monospace">Cấp nguồn thử</text>
+                    <rect x="0" y="98" width="170" height="20" rx="4" fill="#0a1628" stroke="#10b981" stroke-width="1"/>
+                    <path d="M8,108 L14,114 L22,102" stroke="#10b981" stroke-width="2" fill="none"/>
+                    <text x="32" y="112" font-size="9" fill="#94a3b8" font-family="monospace">Dùng resistor bảo vệ</text>
+                </g>
+
+                <!-- Sport/balance icon -->
+                <g transform="translate(760, 30)">
+                    <circle cx="50" cy="30" r="25" fill="none" stroke="#8b5cf6" stroke-width="1.5" opacity="0.4"/>
+                    <text x="50" y="38" font-size="28" text-anchor="middle">🏃</text>
+                    <text x="50" y="80" font-size="10" fill="#8b5cf6" text-anchor="middle" font-family="monospace">Vận động</text>
+                    <text x="50" y="93" font-size="9" fill="#64748b" text-anchor="middle" font-family="monospace">Code + Sport</text>
+                    <!-- balance bar -->
+                    <line x1="15" y1="110" x2="85" y2="110" stroke="#8b5cf6" stroke-width="2"/>
+                    <circle cx="50" cy="110" r="4" fill="#8b5cf6"/>
+                    <rect x="10" y="110" width="18" height="14" rx="2" fill="#2563eb" opacity="0.7"/>
+                    <rect x="72" y="110" width="18" height="14" rx="2" fill="#10b981" opacity="0.7"/>
+                    <text x="19" y="122" font-size="7" fill="white" text-anchor="middle" font-family="monospace">Code</text>
+                    <text x="81" y="122" font-size="7" fill="white" text-anchor="middle" font-family="monospace">Sport</text>
+                </g>
+            </svg>
+        </div>
+        <div class="accent-line" style="background:linear-gradient(90deg,#10b981,#2563eb)"></div>
+        <div class="card-body">
+            <div class="criteria-header">
+                <div class="criteria-number">04</div>
+                <h2 class="criteria-question">Em biết được các cách giữ an toàn</h2>
+            </div>
+            <div class="criteria-answer">
+                <ul>
+                    <li>Áp dụng <span class="highlight">quy tắc 20-20-20</span> cho mắt. Thiết lập góc ngồi công thái học chuẩn.</li>
+                    <li>Sử dụng các công cụ AI/phần mềm nhắc nhở dáng ngồi và khoảng cách mắt an toàn.</li>
+                    <li>Kiểm tra kỹ lưỡng sơ đồ mạch điện trước khi cấp nguồn thử nghiệm. <span class="highlight">Cân bằng</span> giữa code và vận động thể chất.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 5: Phẩm chất -->
+    <div class="criteria-card">
+        <div class="card-image-band">
+            <svg viewBox="0 0 920 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <linearGradient id="g5" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#0d0618"/>
+                        <stop offset="100%" stop-color="#060d1a"/>
+                    </linearGradient>
+                </defs>
+                <rect width="920" height="180" fill="url(#g5)"/>
+
+                <!-- Logic / puzzle icon -->
+                <g transform="translate(30, 20)">
+                    <text x="80" y="15" font-size="10" fill="#8b5cf6" text-anchor="middle" font-family="monospace">Tư duy Logic</text>
+                    <!-- puzzle pieces -->
+                    <path d="M30,30 L70,30 Q70,42 82,42 Q70,42 70,54 L30,54 Q30,42 18,42 Q30,42 30,30Z" fill="#1a0a2e" stroke="#8b5cf6" stroke-width="1.5"/>
+                    <path d="M70,30 L110,30 Q110,42 122,42 Q110,42 110,54 L70,54 Q70,42 58,42 Q70,42 70,30Z" fill="#0d0618" stroke="#8b5cf6" stroke-width="1.5"/>
+                    <path d="M30,54 L70,54 Q70,66 82,66 Q70,66 70,78 L30,78 Q30,66 18,66 Q30,66 30,54Z" fill="#0d0618" stroke="#8b5cf6" stroke-width="1.5"/>
+                    <path d="M70,54 L110,54 Q110,66 122,66 Q110,66 110,78 L70,78 Q70,66 58,66 Q70,66 70,54Z" fill="#1a0a2e" stroke="#8b5cf6" stroke-width="1.5"/>
+                    <text x="80" y="105" font-size="9" fill="#8b5cf6" text-anchor="middle" font-family="monospace">Problem Solving</text>
+                </g>
+
+                <!-- Patience / hourglass -->
+                <g transform="translate(240, 20)">
+                    <text x="55" y="15" font-size="10" fill="#06b6d4" text-anchor="middle" font-family="monospace">Kiên nhẫn</text>
+                    <!-- hourglass shape -->
+                    <polygon points="15,30 95,30 55,70 95,110 15,110 55,70" fill="#0a1628" stroke="#06b6d4" stroke-width="1.5"/>
+                    <!-- sand falling -->
+                    <circle cx="55" cy="55" r="3" fill="#06b6d4" opacity="0.8">
+                        <animate attributeName="cy" values="55;68;55" dur="1.5s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="53" cy="58" r="2" fill="#06b6d4" opacity="0.5">
+                        <animate attributeName="cy" values="58;70;58" dur="1.5s" begin="0.2s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- sand at bottom -->
+                    <ellipse cx="55" cy="100" rx="25" ry="5" fill="#06b6d4" opacity="0.3"/>
+                    <text x="55" y="130" font-size="9" fill="#06b6d4" text-anchor="middle" font-family="monospace">Debug for hours</text>
+                </g>
+
+                <!-- Continuous learning -->
+                <g transform="translate(430, 15)">
+                    <text x="80" y="15" font-size="10" fill="#10b981" text-anchor="middle" font-family="monospace">Tự học liên tục</text>
+                    <!-- spiral/growth arrow -->
+                    <path d="M80,40 Q120,40 120,70 Q120,100 80,100 Q40,100 40,70 Q40,50 60,45" 
+                          stroke="#10b981" stroke-width="2" fill="none" stroke-dasharray="6 3">
+                        <animate attributeName="stroke-dashoffset" values="0;-50" dur="3s" repeatCount="indefinite"/>
+                    </path>
+                    <!-- arrow head -->
+                    <polygon points="55,38 65,48 50,50" fill="#10b981"/>
+                    <!-- book icons around spiral -->
+                    <rect x="95" y="25" width="20" height="15" rx="2" fill="#0a1628" stroke="#10b981" stroke-width="1"/>
+                    <line x1="98" y1="31" x2="112" y2="31" stroke="#10b981" stroke-width="1" opacity="0.6"/>
+                    <line x1="98" y1="35" x2="112" y2="35" stroke="#10b981" stroke-width="1" opacity="0.4"/>
+                    <rect x="95" y="100" width="20" height="15" rx="2" fill="#0a1628" stroke="#f59e0b" stroke-width="1"/>
+                    <line x1="98" y1="106" x2="112" y2="106" stroke="#f59e0b" stroke-width="1" opacity="0.6"/>
+                    <rect x="40" y="100" width="20" height="15" rx="2" fill="#0a1628" stroke="#8b5cf6" stroke-width="1"/>
+                    <text x="80" y="130" font-size="9" fill="#10b981" text-anchor="middle" font-family="monospace">Always Growing</text>
+                </g>
+
+                <!-- English proficiency -->
+                <g transform="translate(660, 20)">
+                    <text x="80" y="15" font-size="10" fill="#f59e0b" text-anchor="middle" font-family="monospace">Tiếng Anh CNTT</text>
+                    <rect x="20" y="25" width="120" height="80" rx="8" fill="#0a1628" stroke="#f59e0b" stroke-width="1.5"/>
+                    <text x="80" y="50" font-size="9" fill="#f59e0b" text-anchor="middle" font-family="monospace">README.md</text>
+                    <line x1="35" y1="60" x2="125" y2="60" stroke="#1e3a5f" stroke-width="1"/>
+                    <text x="80" y="74" font-size="8" fill="#64748b" text-anchor="middle" font-family="monospace">Documentation</text>
+                    <text x="80" y="86" font-size="8" fill="#64748b" text-anchor="middle" font-family="monospace">API Reference</text>
+                    <text x="80" y="98" font-size="8" fill="#64748b" text-anchor="middle" font-family="monospace">Stack Overflow</text>
+                    <!-- EN flag colors subtle -->
+                    <rect x="20" y="115" width="120" height="6" rx="2" fill="#ef4444" opacity="0.3"/>
+                    <rect x="20" y="123" width="120" height="6" rx="2" fill="#2563eb" opacity="0.3"/>
+                    <text x="80" y="142" font-size="9" fill="#f59e0b" text-anchor="middle" font-family="monospace">Read Docs in EN</text>
+                </g>
+            </svg>
+        </div>
+        <div class="accent-line" style="background:linear-gradient(90deg,#8b5cf6,#ec4899)"></div>
+        <div class="card-body">
+            <div class="criteria-header">
+                <div class="criteria-number">05</div>
+                <h2 class="criteria-question">Em xác định được phẩm chất và năng lực cần có</h2>
+            </div>
+            <div class="criteria-answer">
+                Đòi hỏi <span class="highlight">tư duy logic</span> nhạy bén, <span class="highlight">sự kiên nhẫn</span> tột độ, khả năng <span class="highlight">tự học liên tục</span>, óc sáng tạo, kỹ năng giải quyết vấn đề thực tế và vốn <span class="highlight">tiếng Anh chuyên ngành</span> vững chắc để đọc hiểu tài liệu quốc tế.
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 6: Rèn luyện -->
+    <div class="criteria-card">
+        <div class="card-image-band">
+            <svg viewBox="0 0 920 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#060d1a"/>
+                        <stop offset="100%" stop-color="#0a0d1a"/>
+                    </linearGradient>
+                </defs>
+                <rect width="920" height="180" fill="url(#g6)"/>
+
+                <!-- GitHub contribution graph style -->
+                <g transform="translate(30, 20)">
+                    <text x="100" y="15" font-size="10" fill="#10b981" text-anchor="middle" font-family="monospace">Dự án thực tế</text>
+                    <!-- commit grid -->
+                    <g opacity="0.9">
+                        <!-- row 1 -->
+                        <rect x="10" y="25" width="12" height="12" rx="2" fill="#10b981" opacity="0.2"/>
+                        <rect x="26" y="25" width="12" height="12" rx="2" fill="#10b981" opacity="0.6"/>
+                        <rect x="42" y="25" width="12" height="12" rx="2" fill="#10b981" opacity="0.9"/>
+                        <rect x="58" y="25" width="12" height="12" rx="2" fill="#10b981" opacity="0.4"/>
+                        <rect x="74" y="25" width="12" height="12" rx="2" fill="#10b981" opacity="0.8"/>
+                        <rect x="90" y="25" width="12" height="12" rx="2" fill="#10b981" opacity="1"/>
+                        <rect x="106" y="25" width="12" height="12" rx="2" fill="#10b981" opacity="0.3"/>
+                        <!-- row 2 -->
+                        <rect x="10" y="41" width="12" height="12" rx="2" fill="#10b981" opacity="0.7"/>
+                        <rect x="26" y="41" width="12" height="12" rx="2" fill="#10b981" opacity="0.2"/>
+                        <rect x="42" y="41" width="12" height="12" rx="2" fill="#10b981" opacity="1"/>
+                        <rect x="58" y="41" width="12" height="12" rx="2" fill="#10b981" opacity="0.9"/>
+                        <rect x="74" y="41" width="12" height="12" rx="2" fill="#10b981" opacity="0.5"/>
+                        <rect x="90" y="41" width="12" height="12" rx="2" fill="#10b981" opacity="0.3"/>
+                        <rect x="106" y="41" width="12" height="12" rx="2" fill="#10b981" opacity="0.8"/>
+                        <!-- row 3 -->
+                        <rect x="10" y="57" width="12" height="12" rx="2" fill="#10b981" opacity="0.9"/>
+                        <rect x="26" y="57" width="12" height="12" rx="2" fill="#10b981" opacity="0.8"/>
+                        <rect x="42" y="57" width="12" height="12" rx="2" fill="#10b981" opacity="0.2"/>
+                        <rect x="58" y="57" width="12" height="12" rx="2" fill="#10b981" opacity="0.7"/>
+                        <rect x="74" y="57" width="12" height="12" rx="2" fill="#10b981" opacity="1"/>
+                        <rect x="90" y="57" width="12" height="12" rx="2" fill="#10b981" opacity="0.6"/>
+                        <rect x="106" y="57" width="12" height="12" rx="2" fill="#10b981" opacity="0.4"/>
+                    </g>
+                    <text x="60" y="88" font-size="9" fill="#10b981" text-anchor="middle" font-family="monospace">GitHub commits</text>
+
+                    <!-- project icons -->
+                    <rect x="10" y="100" width="55" height="30" rx="5" fill="#0a1628" stroke="#2563eb" stroke-width="1"/>
+                    <text x="37" y="119" font-size="8" fill="#2563eb" text-anchor="middle" font-family="monospace">🌐 Website</text>
+                    <rect x="72" y="100" width="55" height="30" rx="5" fill="#0a1628" stroke="#10b981" stroke-width="1"/>
+                    <text x="99" y="119" font-size="8" fill="#10b981" text-anchor="middle" font-family="monospace">🏠 SmartHome</text>
+                </g>
+
+                <!-- Schedule / timetable -->
+                <g transform="translate(280, 15)">
+                    <text x="110" y="15" font-size="10" fill="#06b6d4" text-anchor="middle" font-family="monospace">Thời gian biểu</text>
+                    <rect x="0" y="22" width="220" height="135" rx="8" fill="#0a1628" stroke="#06b6d4" stroke-width="1"/>
+                    <!-- header row -->
+                    <rect x="0" y="22" width="220" height="20" rx="8" fill="#0d2040"/>
+                    <rect x="0" y="32" width="220" height="10" fill="#0d2040"/>
+                    <text x="110" y="37" font-size="9" fill="#93c5fd" text-anchor="middle" font-family="monospace">Thứ Hai - Chủ Nhật</text>
+                    <!-- time blocks -->
+                    <rect x="10" y="48" width="90" height="16" rx="3" fill="#1e3a5f"/>
+                    <text x="55" y="60" font-size="8" fill="#93c5fd" text-anchor="middle" font-family="monospace">Học văn hóa</text>
+                    <rect x="110" y="48" width="100" height="16" rx="3" fill="#0f2a1f"/>
+                    <text x="160" y="60" font-size="8" fill="#10b981" text-anchor="middle" font-family="monospace">Lập trình</text>
+
+                    <rect x="10" y="70" width="90" height="16" rx="3" fill="#1e3a5f"/>
+                    <text x="55" y="82" font-size="8" fill="#93c5fd" text-anchor="middle" font-family="monospace">Ôn bài thi</text>
+                    <rect x="110" y="70" width="60" height="16" rx="3" fill="#1a0f2e"/>
+                    <text x="140" y="82" font-size="8" fill="#8b5cf6" text-anchor="middle" font-family="monospace">AI/IoT</text>
+
+                    <rect x="10" y="92" width="200" height="16" rx="3" fill="#0f2a1f"/>
+                    <text x="110" y="104" font-size="8" fill="#10b981" text-anchor="middle" font-family="monospace">Dự án thực tế (weekend)</text>
+
+                    <rect x="10" y="114" width="90" height="16" rx="3" fill="#1e1010"/>
+                    <text x="55" y="126" font-size="8" fill="#f59e0b" text-anchor="middle" font-family="monospace">Vận động</text>
+                    <rect x="110" y="114" width="100" height="16" rx="3" fill="#0a1628" stroke="#334155" stroke-width="1"/>
+                    <text x="160" y="126" font-size="8" fill="#64748b" text-anchor="middle" font-family="monospace">Nghỉ ngơi</text>
+                </g>
+
+                <!-- Progress bars -->
+                <g transform="translate(620, 20)">
+                    <text x="110" y="15" font-size="10" fill="#ec4899" text-anchor="middle" font-family="monospace">Kỹ năng hiện tại</text>
+                    <!-- skills progress -->
+                    <text x="10" y="35" font-size="9" fill="#94a3b8" font-family="monospace">Python</text>
+                    <rect x="10" y="40" width="200" height="10" rx="5" fill="#0d2040"/>
+                    <rect x="10" y="40" width="150" height="10" rx="5" fill="url(#prog1)"/>
+                    <defs><linearGradient id="prog1" x1="0%" y1="0%"><stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs>
+
+                    <text x="10" y="62" font-size="9" fill="#94a3b8" font-family="monospace">HTML/CSS</text>
+                    <rect x="10" y="67" width="200" height="10" rx="5" fill="#0d2040"/>
+                    <rect x="10" y="67" width="170" height="10" rx="5" fill="url(#prog2)"/>
+                    <defs><linearGradient id="prog2" x1="0%" y1="0%"><stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#10b981"/></linearGradient></defs>
+
+                    <text x="10" y="89" font-size="9" fill="#94a3b8" font-family="monospace">Arduino/IoT</text>
+                    <rect x="10" y="94" width="200" height="10" rx="5" fill="#0d2040"/>
+                    <rect x="10" y="94" width="120" height="10" rx="5" fill="url(#prog3)"/>
+                    <defs><linearGradient id="prog3" x1="0%" y1="0%"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs>
+
+                    <text x="10" y="116" font-size="9" fill="#94a3b8" font-family="monospace">AI/ML</text>
+                    <rect x="10" y="121" width="200" height="10" rx="5" fill="#0d2040"/>
+                    <rect x="10" y="121" width="90" height="10" rx="5" fill="url(#prog4)"/>
+                    <defs><linearGradient id="prog4" x1="0%" y1="0%"><stop offset="0%" stop-color="#ec4899"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
+
+                    <text x="10" y="143" font-size="9" fill="#94a3b8" font-family="monospace">Tiếng Anh</text>
+                    <rect x="10" y="148" width="200" height="10" rx="5" fill="#0d2040"/>
+                    <rect x="10" y="148" width="140" height="10" rx="5" fill="url(#prog5)"/>
+                    <defs><linearGradient id="prog5" x1="0%" y1="0%"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#ef4444"/></linearGradient></defs>
+                </g>
+            </svg>
+        </div>
+        <div class="accent-line" style="background:linear-gradient(90deg,#06b6d4,#10b981)"></div>
+        <div class="card-body">
+            <div class="criteria-header">
+                <div class="criteria-number">06</div>
+                <h2 class="criteria-question">Em đánh giá và rèn luyện được phẩm chất, năng lực</h2>
+            </div>
+            <div class="criteria-answer">
+                <ul>
+                    <li>Tích cực thực hành qua các <span class="highlight">dự án thực tế</span> (làm website, cấu hình server, xây hệ thống nhà thông minh).</li>
+                    <li>Lập <span class="highlight">thời gian biểu khoa học</span>, cân bằng giữa việc theo đuổi dự án lập trình và mục tiêu ôn thi các môn văn hóa trên lớp.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 7: Thiết kế cẩm nang -->
+    <div class="criteria-card">
+        <div class="card-image-band">
+            <svg viewBox="0 0 920 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <linearGradient id="g7" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#060d1a"/>
+                        <stop offset="100%" stop-color="#0d1020"/>
+                    </linearGradient>
+                    <radialGradient id="glow7" cx="50%" cy="50%">
+                        <stop offset="0%" stop-color="#2563eb" stop-opacity="0.3"/>
+                        <stop offset="100%" stop-color="transparent"/>
+                    </radialGradient>
+                </defs>
+                <rect width="920" height="180" fill="url(#g7)"/>
+                <ellipse cx="460" cy="90" rx="300" ry="80" fill="url(#glow7)"/>
+
+                <!-- Central laptop/website design tool -->
+                <g transform="translate(310, 15)">
+                    <rect x="0" y="0" width="300" height="160" rx="12" fill="#0a1628" stroke="#2563eb" stroke-width="2"/>
+                    <rect x="0" y="0" width="300" height="35" rx="12" fill="#0d2040"/>
+                    <rect x="0" y="25" width="300" height="10" fill="#0d2040"/>
+                    <!-- browser dots -->
+                    <circle cx="18" cy="17" r="5" fill="#ef4444"/>
+                    <circle cx="34" cy="17" r="5" fill="#f59e0b"/>
+                    <circle cx="50" cy="17" r="5" fill="#10b981"/>
+                    <!-- URL bar -->
+                    <rect x="70" y="10" width="190" height="14" rx="7" fill="#060d1a" stroke="#1e40af" stroke-width="1"/>
+                    <text x="165" y="21" font-size="8" fill="#64748b" text-anchor="middle" font-family="monospace">cam-nang-cntt.vn 🔒</text>
+                    <!-- website content -->
+                    <!-- nav -->
+                    <rect x="10" y="42" width="280" height="18" rx="3" fill="#0d2040"/>
+                    <text x="30" y="55" font-size="8" fill="#93c5fd" font-family="monospace">Trang chủ</text>
+                    <text x="90" y="55" font-size="8" fill="#64748b" font-family="monospace">Nghề nghiệp</text>
+                    <text x="160" y="55" font-size="8" fill="#64748b" font-family="monospace">Kỹ năng</text>
+                    <text x="220" y="55" font-size="8" fill="#64748b" font-family="monospace">Liên hệ</text>
+                    <!-- hero section of inner website -->
+                    <rect x="10" y="66" width="280" height="50" rx="5" fill="#060d1a"/>
+                    <text x="150" y="86" font-size="13" fill="white" text-anchor="middle" font-weight="bold" font-family="monospace">Cẩm Nang CNTT</text>
+                    <text x="150" y="102" font-size="8" fill="#06b6d4" text-anchor="middle" font-family="monospace">Hồ sơ năng lực & Định hướng tương lai</text>
+                    <!-- cards preview -->
+                    <rect x="10" y="122" width="85" height="28" rx="4" fill="#0d2040" stroke="#2563eb" stroke-width="1"/>
+                    <rect x="107" y="122" width="85" height="28" rx="4" fill="#0d2040" stroke="#06b6d4" stroke-width="1"/>
+                    <rect x="204" y="122" width="86" height="28" rx="4" fill="#0d2040" stroke="#8b5cf6" stroke-width="1"/>
+                    <text x="52" y="140" font-size="7" fill="#2563eb" text-anchor="middle" font-family="monospace">Nghề 01</text>
+                    <text x="149" y="140" font-size="7" fill="#06b6d4" text-anchor="middle" font-family="monospace">Kỹ năng 02</text>
+                    <text x="247" y="140" font-size="7" fill="#8b5cf6" text-anchor="middle" font-family="monospace">An toàn 03</text>
+                </g>
+
+                <!-- tools used to build -->
+                <g transform="translate(40, 35)">
+                    <text x="0" y="0" font-size="9" fill="#64748b" font-family="monospace">Built with:</text>
+                    <rect x="0" y="10" width="65" height="22" rx="5" fill="#0a1628" stroke="#f59e0b" stroke-width="1"/>
+                    <text x="32" y="25" font-size="9" fill="#f59e0b" text-anchor="middle" font-family="monospace">HTML5</text>
+                    <rect x="0" y="38" width="65" height="22" rx="5" fill="#0a1628" stroke="#2563eb" stroke-width="1"/>
+                    <text x="32" y="53" font-size="9" fill="#2563eb" text-anchor="middle" font-family="monospace">CSS3</text>
+                    <rect x="0" y="66" width="65" height="22" rx="5" fill="#0a1628" stroke="#f59e0b" stroke-width="1"/>
+                    <text x="32" y="81" font-size="9" fill="#f59e0b" text-anchor="middle" font-family="monospace">JavaScript</text>
+                    <rect x="0" y="94" width="65" height="22" rx="5" fill="#0a1628" stroke="#8b5cf6" stroke-width="1"/>
+                    <text x="32" y="109" font-size="9" fill="#8b5cf6" text-anchor="middle" font-family="monospace">SVG</text>
+                </g>
+
+                <!-- achievement badge -->
+                <g transform="translate(700, 30)">
+                    <polygon points="80,5 95,35 130,40 105,65 112,100 80,85 48,100 55,65 30,40 65,35"
+                             fill="#0d1020" stroke="#f59e0b" stroke-width="2"/>
+                    <text x="80" y="52" font-size="16" text-anchor="middle">🏆</text>
+                    <text x="80" y="68" font-size="8" fill="#f59e0b" text-anchor="middle" font-family="monospace">COMPLETED</text>
+                    <text x="80" y="115" font-size="9" fill="#f59e0b" text-anchor="middle" font-family="monospace">Nhiệm vụ 07/07</text>
+                    <text x="80" y="128" font-size="8" fill="#64748b" text-anchor="middle" font-family="monospace">hoàn thành!</text>
+                </g>
+            </svg>
+        </div>
+        <div class="accent-line" style="background:linear-gradient(90deg,#2563eb,#8b5cf6,#ec4899)"></div>
+        <div class="card-body">
+            <div class="criteria-header">
+                <div class="criteria-number">07</div>
+                <h2 class="criteria-question">Em thiết kế được cẩm nang nghề em quan tâm</h2>
+            </div>
+            <div class="criteria-answer">
+                Chính là việc lập trình và thiết kế ra <span class="highlight">Trang web Cẩm nang trực tuyến</span> này để hệ thống hóa kiến thức và định hướng tương lai! Hoàn thành bằng <span class="highlight">HTML5, CSS3, SVG</span> — những công cụ của chính nghề mình đam mê. 🚀
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>✦ Cẩm Nang Nghề Nghiệp · Công Nghệ Thông Tin ✦</p>
+    <p style="margin-top:6px; color: #334155;">Được thiết kế & lập trình thủ công bằng HTML · CSS · SVG</p>
+</footer>
+
+<!-- Print button (screen only) -->
+<button class="print-btn" onclick="window.print()">🖨️ In A4</button>
+
+</body>
+</html>
